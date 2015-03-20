@@ -12,12 +12,12 @@ BOOST_LIB=$(BOOST)/lib
 
 # Set this to the root directory of Eigen 
 # (should have a subdirectory named Eigen):
-EIGEN=../3rdparty
+EIGEN=../../3rdparty
 
 # To disable multithreading, comment out the line below:
 OMP=1
 
-TCLAP=../3rdparty/tclap/include
+TCLAP=../../3rdparty/tclap/include
 
 BOOST_CFLAGS=-I$(BOOST_INC)
 BOOST_LDFLAGS=-L$(BOOST_LIB)
