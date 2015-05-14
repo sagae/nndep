@@ -7,7 +7,6 @@
 
 #include <boost/algorithm/string/join.hpp>
 #include <boost/algorithm/string.hpp>
-#include <tclap/CmdLine.h>
 
 #include <Eigen/Core>
 #include <Eigen/Dense>
@@ -41,7 +40,6 @@ int sentcnt = 0;
 
 using namespace std;
 using namespace boost;
-using namespace TCLAP;
 using namespace Eigen;
 
 using namespace nplm;
@@ -97,7 +95,14 @@ int makefeats( parserstate& pst, vector<string>& fv ) {
   // distance between s1 and s2
   fv.push_back( "NUM=" + toString( dist1 ) );
   fv.push_back( "NUM=" + toString( dist2 ) );
-  //fv.push_back( toString( dist1 ) + "." + toString( dist2 ) );
+
+  fv.push_back( "NUM=" + toString( s1->nch ) );
+  fv.push_back( "NUM=" + toString( s1->nrch ) );
+  fv.push_back( "NUM=" + toString( s1->nlch ) );
+
+  fv.push_back( "NUM=" + toString( s2->nch ) );
+  fv.push_back( "NUM=" + toString( s2->nrch ) );
+  fv.push_back( "NUM=" + toString( s2->nlch ) );
 
   // pos between s1 and s2, if any
   if( dist1 > 1 ) {
@@ -125,8 +130,19 @@ int makefeats( parserstate& pst, vector<string>& fv ) {
   fv.push_back( "POS=" + pst.inputq[ s1->rch ].pos );
   fv.push_back( "WRD=" + pst.inputq[ s1->rch ].word );
   //fv.push_back( pst.inputq[ s1->rch ].label );
+  fv.push_back( "POS=" + pst.inputq[ s1->lch2 ].pos );
+  fv.push_back( "WRD=" + pst.inputq[ s1->lch2 ].word );
+  //fv.push_back( pst.inputq[ s1->lch ].label );
+  fv.push_back( "POS=" + pst.inputq[ s1->rch2 ].pos );
+  fv.push_back( "WRD=" + pst.inputq[ s1->rch2 ].word );
+  //fv.push_back( pst.inputq[ s1->rch ].label );
+  fv.push_back( "POS=" + pst.inputq[ s1->lgch ].pos );
+  fv.push_back( "WRD=" + pst.inputq[ s1->lgch ].word );
+  //fv.push_back( pst.inputq[ s1->lch ].label );
+  fv.push_back( "POS=" + pst.inputq[ s1->rgch ].pos );
+  fv.push_back( "WRD=" + pst.inputq[ s1->rgch ].word );
+  //fv.push_back( pst.inputq[ s1->rch ].label );
    
-
   fv.push_back( "WRD=" + s2->word );
   fv.push_back( "POS=" + s2->pos );
   //fv.push_back( s2->label );
@@ -135,6 +151,18 @@ int makefeats( parserstate& pst, vector<string>& fv ) {
   //fv.push_back( pst.inputq[ s2->lch ].label );
   fv.push_back( "POS=" + pst.inputq[ s2->rch ].pos );
   fv.push_back( "WRD=" + pst.inputq[ s2->rch ].word );
+  //fv.push_back( pst.inputq[ s2->rch ].label );
+  fv.push_back( "POS=" + pst.inputq[ s2->lch2 ].pos );
+  fv.push_back( "WRD=" + pst.inputq[ s2->lch2 ].word );
+  //fv.push_back( pst.inputq[ s2->lch ].label );
+  fv.push_back( "POS=" + pst.inputq[ s2->rch2 ].pos );
+  fv.push_back( "WRD=" + pst.inputq[ s2->rch2 ].word );
+  //fv.push_back( pst.inputq[ s2->rch ].label );
+  fv.push_back( "POS=" + pst.inputq[ s2->lgch ].pos );
+  fv.push_back( "WRD=" + pst.inputq[ s2->lgch ].word );
+  //fv.push_back( pst.inputq[ s2->lch ].label );
+  fv.push_back( "POS=" + pst.inputq[ s2->rgch ].pos );
+  fv.push_back( "WRD=" + pst.inputq[ s2->rgch ].word );
   //fv.push_back( pst.inputq[ s2->rch ].label );
 
   fv.push_back( "WRD=" + s3->word );

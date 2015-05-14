@@ -41,6 +41,10 @@ class item {
   int goldout;
   int lch;
   int rch;
+  int lgch;
+  int rgch;
+  int lch2;
+  int rch2;
   int nch;
   int nlch;
   int nrch;
@@ -60,10 +64,14 @@ class item {
     goldin( 0 ),
     goldout( 0 ),
     lch( 0 ),
-    rch( 0 ), 
-      nch( 0 ), 
-      nlch( 0 ),
-      nrch( 0 )  {
+    rch( 0 ),
+    lgch( 0 ),
+    rgch( 0 ),
+    lch2( 0 ),
+    rch2( 0 ),
+    nch( 0 ), 
+    nlch( 0 ),
+    nrch( 0 )  {
   }
 
   item( const item &it ): 
@@ -82,9 +90,13 @@ class item {
     goldout( it.goldout ),
     lch( it.lch ),
     rch( it.rch ),
-      nch( it.nch ),
-      nlch( it.nrch ),
-      nrch( it.nlch ) {
+    lgch( it.lgch ),
+    rgch( it.rgch ),
+    lch2( it.lch2 ),
+    rch2( it.rch2 ),
+    nch( it.nch ),
+    nlch( it.nlch ),
+    nrch( it.nrch ) {
   } 
     
   void print() const {
@@ -160,7 +172,7 @@ class parserstate {
   }
  
   parserstate( const parserstate &ps ):
-    inputq( ps.inputq ),
+    inputq(ps.inputq),
     s( ps.s ),
     outlinks( ps.outlinks ),
     outlabels( ps.outlabels ),
@@ -212,6 +224,9 @@ class parserstate {
     inputq[itright].label = label;
     inputq[itright].goldout--;
     inputq[itleft].goldin--;
+    inputq[itleft].lgch = inputq[itright].lch;
+    inputq[itleft].rgch = inputq[itright].rch;
+    inputq[itleft].rch2 = inputq[itleft].rch;
     inputq[itleft].rch = itright;
     inputq[itleft].nrch++;
     inputq[itleft].nch++;
@@ -239,6 +254,9 @@ class parserstate {
     inputq[itleft].label = label;
     inputq[itleft].goldout--;
     inputq[itright].goldin--;
+    inputq[itright].lgch = inputq[itleft].lch;
+    inputq[itright].rgch = inputq[itleft].rch;
+    inputq[itright].lch2 = inputq[itright].lch;
     inputq[itright].lch = itleft;
     inputq[itright].nlch++;
     inputq[itright].nch++;
