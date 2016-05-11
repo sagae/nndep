@@ -1,4 +1,4 @@
-# nndep a neural network dependency parser
+# nndep: a neural network dependency parser
 
 This is the neural network parser described in
 
